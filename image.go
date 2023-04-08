@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"image"
 	"image/jpeg"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -26,7 +26,7 @@ func PrefixImgBase64(path string) (baseImg string, err error) {
 		return
 	}
 	defer file.Close()
-	imgByte, _ := ioutil.ReadAll(file)
+	imgByte, _ := io.ReadAll(file)
 
 	// 判断文件类型，生成一个前缀，拼接base64后可以直接粘贴到浏览器打开，不需要可以不用下面代码
 	//取图片类型
@@ -52,7 +52,7 @@ func ImgBase64(path string) (baseImg string, err error) {
 		return
 	}
 	defer file.Close()
-	imgByte, _ := ioutil.ReadAll(file)
+	imgByte, _ := io.ReadAll(file)
 
 	baseImg = base64.StdEncoding.EncodeToString(imgByte)
 	return
